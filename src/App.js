@@ -10,7 +10,23 @@ class App extends React.Component  {
     show={
       val:true
     }
-    
+    lifeCycle={
+      date: new Date()
+    }
+    componentDidMount() {
+      this.timerID = setInterval(
+        () => this.tick(),
+        1000
+      );
+    }
+    componentWillUnmount() {
+      clearInterval(this.timerID);
+    }
+    tick() {
+      this.setState({
+        date:this.lifeCycle.date=new Date()
+      });
+    }  
     
   
   render() {
@@ -28,6 +44,7 @@ class App extends React.Component  {
 
     return(
       <div className="App">
+      <h2>Il est {this.lifeCycle.date.toLocaleTimeString()}.</h2>
      {this.show.val? <div className="mt-6 space-y-12 lg:space-y-0 lg:grid  justify-items-center  ">
        <div className="group relative">
         <div className="relative w-80 h-100 bg-white ">
